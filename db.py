@@ -6,9 +6,21 @@ import os
 
 class DatabaseConnection:
     def __init__(self):
+
+        if os.getenv('DB_NAME') == 'test_db':
+            self.db_name = 'test_db'
+        else:
+            self.db_name = 'learn_db'
+
+        self.db_user = os.getenv('DB_USER')
+        self.db_host = os.getenv('DB_HOST')
+        self.db_password = os.getenv('DB_PASSWORD')
+
+        pprint(self.db_name)
+
         try:
             self.connection = psycopg2.connect(
-                dbname='learn_db', user='postgres', host='localhost', password='kengo1234', port=5432
+                dbname=self.db_name, user=self.db_user, host=self.db_host, password=self.db_password, port=5432
             )
             self.connection.autocommit = True
             self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)

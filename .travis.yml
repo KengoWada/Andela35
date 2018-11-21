@@ -1,0 +1,24 @@
+language: python
+
+python: 
+  - "3.6"
+services:
+  - postgresql
+env:
+  global:
+    - DB_NAME=test_db
+    - DB_USER=postgres
+    - DB_HOST=localhost
+    - DB_PASSWORD=kengo1234
+
+install:
+  - pip install -r requirements.txt
+
+before script:
+  - psql -c 'createdb test_db;' -U postgres
+
+script:
+  - python -m pytest --cov
+  
+after_success:
+  - coveralls
