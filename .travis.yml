@@ -12,10 +12,10 @@ install:
   - "pip install -r requirements.txt"
 
 before script:
-  - psql -c 'createdb test_db;' -U postgres
+  - "psql -c 'createdb test_db;' -U postgres"
 
 script:
-  - python -m pytest --cov
+  - python3 -m pytest --cov
   
 after_success:
   - coveralls
