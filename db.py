@@ -19,14 +19,15 @@ class DatabaseConnection:
                 dbname=self.db_name, user='postgres', host='localhost', password='kengo1234', port=5432
             )
             self.connection.autocommit = True
-            self.cur = self.connection.cursor(cur_factory=psycopg2.extras.RealDictCursor)
+            self.cur = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
             print('Connected to the database successfully.')
 
             create_users_table = "CREATE TABLE IF NOT EXISTS users (userId SERIAL NOT NULL PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL);"
 
             self.cur.execute(create_users_table)
-        except:
+        except Exception as e:
+            pprint(e)
             pprint('Failed to connect to the database.')
 
     def register_user(self, username, email, password):
