@@ -7,9 +7,6 @@ services:
 env:
   global:
     - DB_NAME=test_db
-    - DB_USER=postgres
-    - DB_HOST=localhost
-    - DB_PASSWORD=kengo1234
 
 install:
   - pip install -r requirements.txt
