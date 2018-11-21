@@ -1,7 +1,7 @@
 language: python
 
 python: 
-  - "3.6.7"
+  - "3.6.6"
 services:
   - postgresql
 env:
@@ -12,7 +12,7 @@ install:
   - "pip install -r requirements.txt"
 
 before script:
-  - "psql -c 'createdb test_db;' -U postgres"
+  - psql -c 'createdb test_db;' -U postgres
 
 script:
   - python -m pytest --cov
