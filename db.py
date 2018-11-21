@@ -3,7 +3,7 @@ import psycopg2.extras
 from pprint import pprint
 import os
 
-
+# We are deploying to Heroku!!!
 class DatabaseConnection:
     def __init__(self):
         try:
