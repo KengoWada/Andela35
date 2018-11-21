@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/KengoWada/Andela35.svg?branch=develop)](https://travis-ci.org/KengoWada/Andela35) [![Coverage Status](https://coveralls.io/repos/github/KengoWada/Andela35/badge.svg)](https://coveralls.io/github/KengoWada/Andela35)
+[![Build Status](https://travis-ci.org/KengoWada/Andela35.svg?branch=develop)](https://travis-ci.org/KengoWada/Andela35) [![Coverage Status](https://coveralls.io/repos/github/KengoWada/Andela35/badge.svg?branch=develop)](https://coveralls.io/github/KengoWada/Andela35?branch=develop)
 
 # Andela35 TRAINING REPO
 This repo is to help learners easily follow along during the session.
