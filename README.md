@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/KengoWada/Andela35.svg?branch=develop)](https://travis-ci.org/KengoWada/Andela35)
+
 # Andela35 TRAINING REPO
 This repo is to help learners easily follow along during the session.
 

@@ -41,6 +41,7 @@ pyOpenSSL==18.0.0
 pytest==4.0.0
 pytest-cov==2.6.0
 python-dotenv==0.9.1
+PyYAML==3.13
 requests==2.20.1
 scandir==1.9.0
 singledispatch==3.4.0.3
