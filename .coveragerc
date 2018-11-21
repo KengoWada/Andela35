@@ -6,3 +6,4 @@ omit =
     *.pyc
     */venv/*
     */home/travis/virtualenv/*
+    */usr/lib/python3/*
