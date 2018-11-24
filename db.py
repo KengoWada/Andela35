@@ -1,4 +1,4 @@
-import psycopg
+import psycopg2
 import psycopg2.extras
 from pprint import pprint
 import os
