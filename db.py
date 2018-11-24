@@ -1,4 +1,4 @@
-import psycopg2
+Heroku CLIimport psycopg2
 import psycopg2.extras
 from pprint import pprint
 import os
@@ -16,7 +16,7 @@ class DatabaseConnection:
 
         try:
             self.connection = psycopg2.connect(
-                dbname=self.db_name, user='postgres', host='localhost', password='kengo1234', port=5432
+                dbname='d9ke6glsa2ksgu', user='oxvqoqgwylhbeq', host='ec2-50-19-249-121.compute-1.amazonaws.com', password='22df9dcb6c71a27256acbad9e5353dd6a9fc8176a4a39ae320eb5d03cad1002b', port=5432
             )
             self.connection.autocommit = True
             self.cur = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
