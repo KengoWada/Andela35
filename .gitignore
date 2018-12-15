@@ -2,3 +2,6 @@ venv
 .vscode
 __pycache__
 *.pyc
+.coverage
+.prod_env
+.test_env

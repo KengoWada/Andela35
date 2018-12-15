@@ -309,6 +309,48 @@ class TestUsers(unittest.TestCase):
 
         self.assertEqual(message['message'], 'Wrong login credentials.')
 
+    def test_welcome(self):
+        user1 = {
+            'username': 'KengoWada',
+            'email': 'kengowada@apple.com',
+            'password': 'kengowada'
+        }
+
+        response1 = self.test_client.post(
+            'api/v1/signup',
+            content_type='application/json',
+            data=json.dumps(user1)
+        )
+
+        token = json.loads(response1.data.decode())
+
+        response = self.test_client.get(
+            'api/v1/welcome',
+            headers={'Authorization': 'Bearer ' + token['access_token']},
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    
+    def test_invalid_route(self):
+        user = {
+            'username': 'KengoWada',
+            'email': 'kengowada@apple.com',
+            'password': 'kengowada'
+        }
+
+        response = self.test_client.post(
+            'api/v1/new_route',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+
+        message = json.loads(response.data.decode())
+
+        self.assertEqual(message['message'], 'Please contact Kengo Wada for more details on this API.')
+
+
     def tearDown(self):
         self.db.drop_table('users')
     
