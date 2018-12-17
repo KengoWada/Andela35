@@ -37,4 +37,4 @@ class Users:
         elif not password or password.isspace():
             return 'Password field can not be left empty.'
         else:
-            return False
+            return None

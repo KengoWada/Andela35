@@ -26,7 +26,6 @@ def signup():
 
     if error != None:
         return jsonify({'Error': error}), 400
-
     if not exists:
         password_hash = generate_password_hash(password, method='sha256')
         db.register_user(username, email, password_hash)
@@ -36,7 +35,7 @@ def signup():
             'message': f'{username} successfully registered.'
             }), 201
     else:
-        return jsonify({'message': exists}), 401      
+        return jsonify({'message': exists}), 401     
 
 
 @app.route('/api/v1/login', methods=['POST'])
@@ -48,14 +47,13 @@ def login():
 
     error = Users.login_validate(username, password)
 
-    if error is not False:
-        return jsonify ({'Error': error}), 400
-    
-    user = db.login(username)
+    if error != None:
+        return jsonify({'Error': error}), 400
 
-    if user is None:
-        return jsonify ({'message': 'Wrong login credentials.'})
-    
+    user = db.login(username)
+    if user == None:
+        return jsonify ({'message': 'Wrong login credentials.'}), 400
+
     if check_password_hash(user['password'], password) and user['username'] == username:
         token = create_access_token(username)
         return jsonify ({
@@ -64,6 +62,8 @@ def login():
         }), 200
     else:
         return jsonify ({'message': 'Wrong login credentials.'}), 400
+        
+
 
 @app.route('/api/v1/welcome')
 @jwt_required
@@ -72,7 +72,8 @@ def welcome():
 
     return jsonify ({
         'message': f'{username}, Thank you for using Kengo\'s API.'
-    })
+    }), 200
+
 
 @app.errorhandler(404)
 def page_not_found(e):

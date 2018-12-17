@@ -12,8 +12,6 @@ class DatabaseConnection:
         else:
             self.db_name = 'learn_db'
 
-        pprint(self.db_name)
-
         try:
             self.connection = psycopg2.connect(
                 dbname=self.db_name, user='postgres', host='localhost', password='kengo1234', port=5432
@@ -22,6 +20,7 @@ class DatabaseConnection:
             self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
             print('Connected to the database successfully.')
+            print(self.db_name)
 
             create_users_table = "CREATE TABLE IF NOT EXISTS users (userId SERIAL NOT NULL PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL);"
 
@@ -63,4 +62,4 @@ class DatabaseConnection:
 
 
 if __name__ == '__main__':
-    db = DatabaseConnection()
+    db_name = DatabaseConnection()

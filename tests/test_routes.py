@@ -309,7 +309,7 @@ class TestUsers(unittest.TestCase):
 
         self.assertEqual(message['message'], 'Wrong login credentials.')
 
-    def test_protected_route(self):
+    def test_welcome(self):
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -330,11 +330,10 @@ class TestUsers(unittest.TestCase):
             content_type='application/json'
         )
 
-        message = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(message['message'], 'KengoWada, Thank you for using Kengo\'s API.')
-
-    def test_invalid_url(self):
+    
+    def test_invalid_route(self):
         user = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
