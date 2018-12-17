@@ -17,7 +17,7 @@ enum34==1.1.6
 Flask==1.0.2
 Flask-JWT-Extended==3.13.1
 funcsigs==1.0.2
-futures==3.2.0
+# futures==3.2.0
 gunicorn==19.9.0
 idna==2.7
 ipaddress==1.0.22
@@ -41,6 +41,7 @@ pyOpenSSL==18.0.0
 pytest==4.0.0
 pytest-cov==2.6.0
 python-dotenv==0.9.1
+PyYAML==3.13
 requests==2.20.1
 scandir==1.9.0
 singledispatch==3.4.0.3

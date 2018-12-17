@@ -24,19 +24,18 @@ def signup():
     error = user.validate_input()
     exists = user.check_user_exist()
 
-    if not error:
-        if not exists:
-            password_hash = generate_password_hash(password, method='sha256')
-            db.register_user(username, email, password_hash)
-            token = create_access_token(username)
-            return jsonify({
-                'access_token': token,
-                'message': f'{username} successfully registered.'
-                }), 201
-        else:
-            return jsonify({'message': exists}), 401
-    else:
+    if error != None:
         return jsonify({'Error': error}), 400
+    if not exists:
+        password_hash = generate_password_hash(password, method='sha256')
+        db.register_user(username, email, password_hash)
+        token = create_access_token(username)
+        return jsonify({
+            'access_token': token,
+            'message': f'{username} successfully registered.'
+            }), 201
+    else:
+        return jsonify({'message': exists}), 401     
 
 
 @app.route('/api/v1/login', methods=['POST'])
@@ -48,21 +47,22 @@ def login():
 
     error = Users.login_validate(username, password)
 
-    if not error:
-        user = db.login(username)
-        if user != None:
-            if check_password_hash(user['password'], password) and user['username'] == username:
-                token = create_access_token(username)
-                return jsonify ({
-                    'access_token': token,
-                    'message': f'{username} successfully logged in.'
-                }), 200
-            else:
-                return jsonify ({'message': 'Wrong login credentials.'}), 400
-        else:
-            return jsonify ({'message': 'Wrong login credentials.'}), 400
-    else:
+    if error != None:
         return jsonify({'Error': error}), 400
+
+    user = db.login(username)
+    if user == None:
+        return jsonify ({'message': 'Wrong login credentials.'}), 400
+
+    if check_password_hash(user['password'], password) and user['username'] == username:
+        token = create_access_token(username)
+        return jsonify ({
+            'access_token': token,
+            'message': f'{username} successfully logged in.'
+        }), 200
+    else:
+        return jsonify ({'message': 'Wrong login credentials.'}), 400
+        
 
 
 @app.route('/api/v1/welcome')
@@ -72,7 +72,8 @@ def welcome():
 
     return jsonify ({
         'message': f'{username}, Thank you for using Kengo\'s API.'
-    })
+    }), 200
+
 
 @app.errorhandler(404)
 def page_not_found(e):

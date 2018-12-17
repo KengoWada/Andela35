@@ -6,19 +6,27 @@ import os
 # We are deploying to Heroku!!!
 class DatabaseConnection:
     def __init__(self):
+
+        if os.getenv('DB_NAME') == 'test_db':
+            self.db_name = 'test_db'
+        else:
+            self.db_name = 'learn_db'
+
         try:
             self.connection = psycopg2.connect(
-                dbname='learn_db', user='postgres', host='localhost', password='kengo1234', port=5432
+                dbname=self.db_name, user='postgres', host='localhost', password='kengo1234', port=5432
             )
             self.connection.autocommit = True
             self.cursor = self.connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
             print('Connected to the database successfully.')
+            print(self.db_name)
 
             create_users_table = "CREATE TABLE IF NOT EXISTS users (userId SERIAL NOT NULL PRIMARY KEY, username TEXT NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL);"
 
             self.cursor.execute(create_users_table)
-        except:
+        except Exception as e:
+            pprint(e)
             pprint('Failed to connect to the database.')
 
     def register_user(self, username, email, password):
@@ -54,4 +62,4 @@ class DatabaseConnection:
 
 
 if __name__ == '__main__':
-    db = DatabaseConnection()
+    db_name = DatabaseConnection()
