@@ -1,7 +1,6 @@
 from db import DatabaseConnection
 import re
 
-db = DatabaseConnection()
 
 class Users:
     def __init__(self, username, email, password):
@@ -22,6 +21,7 @@ class Users:
             return 'Password has to be longer than 8 characters.'
     
     def check_user_exist(self):
+        db = DatabaseConnection()
         username = db.check_username(self.username)
         email = db.check_email(self.email)
 

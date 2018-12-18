@@ -30,11 +30,17 @@ class DatabaseConnection:
             pprint('Failed to connect to the database.')
 
     def register_user(self, username, email, password):
+        """
+        Register a user
+        """
         reg_user = f"INSERT INTO users(username, email, password) VALUES('{username}', '{email}', '{password}');"
         pprint(reg_user)
         self.cursor.execute(reg_user)
     
     def check_username(self, username):
+        """
+        Check if a username already exists. Usernames are unique
+        """
         query = f"SELECT * FROM users WHERE username='{username}';"
         pprint(query)
         self.cursor.execute(query)
@@ -42,6 +48,9 @@ class DatabaseConnection:
         return user
     
     def check_email(self, email):
+        """
+        Check if a email already exists. Emails are unique
+        """
         query = f"SELECT * FROM users WHERE email='{email}';"
         pprint(query)
         self.cursor.execute(query)
@@ -49,6 +58,9 @@ class DatabaseConnection:
         return user
 
     def login(self, username):
+        """
+        Get login credentials for comarison to login
+        """
         query = f"SELECT * FROM users WHERE username='{username}';"
         pprint(query)
         self.cursor.execute(query)
@@ -57,6 +69,9 @@ class DatabaseConnection:
         return user
 
     def drop_table(self, table_name):
+        """
+        Drop tables after tests
+        """
         drop = f"DROP TABLE {table_name};"
         self.cursor.execute(drop)
 

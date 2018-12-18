@@ -10,8 +10,6 @@ jwt = JWTManager(app)
 app.config['JWT_SECRET_KEY'] = 'KenG0W@Da4!'
 
 
-db = DatabaseConnection()
-
 @app.route('/api/v1/signup', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -28,6 +26,7 @@ def signup():
         return jsonify({'Error': error}), 400
     if not exists:
         password_hash = generate_password_hash(password, method='sha256')
+        db = DatabaseConnection()
         db.register_user(username, email, password_hash)
         token = create_access_token(username)
         return jsonify({
@@ -50,6 +49,7 @@ def login():
     if error != None:
         return jsonify({'Error': error}), 400
 
+    db = DatabaseConnection()
     user = db.login(username)
     if user == None:
         return jsonify ({'message': 'Wrong login credentials.'}), 400
@@ -63,7 +63,6 @@ def login():
     else:
         return jsonify ({'message': 'Wrong login credentials.'}), 400
         
-
 
 @app.route('/api/v1/welcome')
 @jwt_required
