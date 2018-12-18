@@ -6,10 +6,16 @@ from db import DatabaseConnection
 
 class TestUsers(unittest.TestCase):
     def setUp(self):
+        """
+        Setup our test Client
+        """
         self.test_client = app.test_client()
         self.db = DatabaseConnection()
 
     def test_user_register(self):
+        """
+        Test registering a user with correct details
+        """
         user = {
             'username': 'KengoWada',
             'email': 'kengowada@nasa.com',
@@ -27,6 +33,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'KengoWada successfully registered.')
     
     def test_register_username_twice(self):
+        """
+        Test registering a user twice with the same username
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -56,6 +65,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'Username is taken.')
 
     def test_register_email_twice(self):
+        """
+        Test registering a user with the same email twice
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -85,6 +97,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'Email already has an account.')
 
     def test_register_empty_username(self):
+        """
+        Test registering a user with the username field empty
+        """
         user = {
             'username': '',
             'email': 'kengowada@nasa.com',
@@ -102,6 +117,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Username field can not be left empty.')
 
     def test_register_empty_email(self):
+        """
+        Test registering a user with email field empty
+        """
         user = {
             'username': 'kengowada',
             'email': '',
@@ -119,6 +137,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Email field can not be left empty.')
 
     def test_register_empty_password(self):
+        """
+        Test registering a user with password field empty
+        """
         user = {
             'username': 'kengowada',
             'email': 'kengowada@nasa.com',
@@ -136,6 +157,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Password field can not be left empty.')
 
     def test_register_invalid_email(self):
+        """
+        Test registering a user with wrong email format
+        """
         user = {
             'username': 'kengowada',
             'email': 'kengonasa.com',
@@ -153,6 +177,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Enter a valid email address.')
 
     def test_register_password_length(self):
+        """
+        Test registering a user with password less than 8 characters
+        """
         user = {
             'username': 'kengowada',
             'email': 'kengowada@nasa.com',
@@ -170,6 +197,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Password has to be longer than 8 characters.')
 
     def test_user_login(self):
+        """
+        Test login a user with correct details
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -198,6 +228,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'KengoWada successfully logged in.')
 
     def test_user_login_empty_username(self):
+        """
+        Test login a user with empty username
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -226,6 +259,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Username field can not be left empty.')
 
     def test_user_login_empty_password(self):
+        """
+        Test login a user with empty password
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -254,6 +290,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['Error'], 'Password field can not be left empty.')
     
     def test_login_wrong_username(self):
+        """
+        Test login a user with username that doesn't exist
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -282,6 +321,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'Wrong login credentials.')
 
     def test_login_wrong_password(self):
+        """
+        Test login a user with wrong password
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -310,6 +352,9 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'Wrong login credentials.')
 
     def test_welcome(self):
+        """
+        Test accessing the protected route
+        """
         user1 = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -334,6 +379,9 @@ class TestUsers(unittest.TestCase):
 
     
     def test_invalid_route(self):
+        """
+        Test for when invalid routes are used to make requests
+        """
         user = {
             'username': 'KengoWada',
             'email': 'kengowada@apple.com',
@@ -351,5 +399,8 @@ class TestUsers(unittest.TestCase):
         self.assertEqual(message['message'], 'Please contact Kengo Wada for more details on this API.')
 
     def tearDown(self):
+        """
+        Drop the user table very after a single test has run
+        """
         self.db.drop_table('users')
     
