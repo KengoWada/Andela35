@@ -17,7 +17,7 @@ before_script:
 
 # command to run tests
 script:
-  - python3 -m pytest --cov=app/
+  - python3 -m pytest --cov=api/
   
 after_success:
   - coveralls
