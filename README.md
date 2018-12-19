@@ -1,3 +1,6 @@
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a142ad9cf8f692bdf185/test_coverage)](https://codeclimate.com/github/llwasampijja/Andela35/test_coverage)
+
+
 # Andela35 TRAINING REPO
 This repo is to help learners easily follow along during the session.
 
