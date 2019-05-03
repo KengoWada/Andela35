@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.6"
+
+services:
+  - postgresql
+
+env:
+  global:
+    - DB_NAME=test_db
+
+install:
+  - "pip install -r requirements.txt"
+
+before_script:
+  - psql -c 'create database test_db;' -U postgres
+
+# command to run tests
+script:
+  - python3 -m pytest --cov=api/
+  
+after_success:
+  - coveralls
