@@ -45,6 +45,6 @@ requests==2.20.1
 scandir==1.9.0
 singledispatch==3.4.0.3
 six==1.11.0
-urllib3==1.24.1
+urllib3==1.24.2
 Werkzeug==0.14.1
 wrapt==1.10.11
