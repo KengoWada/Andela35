@@ -31,7 +31,7 @@ pathlib2==2.3.2
 pep8==1.7.1
 pluggy==0.8.0
 psycopg2==2.7.6.1
-py==1.7.0
+py==1.10.0
 pycodestyle==2.4.0
 pycparser==2.19
 PyJWT==1.6.4
